@@ -1,4 +1,5 @@
 # Objective: Maximize Macro F1-Score
+!pip install optuna #for google colab
 import numpy as np
 import pandas as pd
 import optuna
@@ -39,7 +40,10 @@ def load_data():
     num_cols = ['age', 'trestbps', 'chol', 'thalach', 'oldpeak']
     cat_cols = ['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'ca', 'thal']
     preproc = ColumnTransformer(
-        transformers=,
+        transformers= [
+        ('num', StandardScaler(), num_cols),
+        ('cat', OneHotEncoder(handle_unknown='ignore'), cat_cols)
+    ],
         remainder='passthrough'
     )    
     return X_train, X_test, y_train, y_test, preproc
