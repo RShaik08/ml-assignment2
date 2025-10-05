@@ -44,7 +44,7 @@ def load_data():
         ('num', StandardScaler(), num_cols),
         ('cat', OneHotEncoder(handle_unknown='ignore'), cat_cols)
     ],
-        remainder='passthrough'
+        remainder='passthrough'#using remainder = 'drop' would be better memory wise
     )    
     return X_train, X_test, y_train, y_test, preproc
 def objective(trial: optuna.Trial, X_train, y_train, preproc):
@@ -96,3 +96,4 @@ if __name__ == "__main__":
     print("\n--- Final Test Score ---")
     print(f"Test Accuracy: {test_acc:.4f}")
     print(f"Test F1-Score: {test_f1:.4f}")
+    #if necessary, can print runtime per trial for progress feedback, by importing time 
