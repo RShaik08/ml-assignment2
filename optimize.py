@@ -82,7 +82,7 @@ if __name__ == "__main__":
     print("Starting BO (TPE) optimization...")
     study.optimize(
         lambda trial: objective(trial, X_train, y_train, preproc), 
-        n_trials=100
+        n_trials=100 #i worked on n_trails = 10 as 100 was taking a long time and each trial does 5 cross validations on a random forest which is computationally heavy
     )
     print("\n--- OPTIMIZATION RESULTS ---")
     print(f"Best CV F1-Score: {study.best_value:.4f}")
@@ -93,7 +93,6 @@ if __name__ == "__main__":
     final_pipe.fit(X_train, y_train)
     test_f1 = f1_score(y_test, final_pipe.predict(X_test), average='macro')
     test_acc = final_pipe.score(X_test, y_test)
-
     print("\n--- Final Test Score ---")
     print(f"Test Accuracy: {test_acc:.4f}")
     print(f"Test F1-Score: {test_f1:.4f}")
